@@ -13,8 +13,7 @@ from keras.layers import Dense, Dropout
 from keras.optimizers import RMSprop
 from keras.callbacks import TensorBoard
 
-callback = TensorBoard(log_dir='./logs', histogram_freq=0, batch_size=128, write_graph=True, write_grads=True,
-             write_images=False, embeddings_freq=0, embeddings_layer_names=None, embeddings_metadata=None)
+callback = TensorBoard(log_dir='./logs', histogram_freq=4, batch_size=128, write_graph=True, write_grads=True)
 
 batch_size = 128
 num_classes = 10
