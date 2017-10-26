@@ -1,4 +1,4 @@
-''Trains a simple deep NN on the MNIST dataset.
+''''Trains a simple deep NN on the MNIST dataset.
 Gets to 98.40% test accuracy after 20 epochs
 (there is *a lot* of margin for parameter tuning).
 2 seconds per epoch on a K520 GPU.
@@ -11,6 +11,10 @@ from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.optimizers import RMSprop
+from keras.callbacks import TensorBoard
+
+callback = TensorBoard(log_dir='./logs', histogram_freq=0, batch_size=128, write_graph=True, write_grads=True,
+             write_images=False, embeddings_freq=0, embeddings_layer_names=None, embeddings_metadata=None)
 
 batch_size = 128
 num_classes = 10
@@ -49,7 +53,8 @@ history = model.fit(x_train, y_train,
                     batch_size=batch_size,
                     epochs=epochs,
                     verbose=1,
-                    validation_data=(x_test, y_test))
+                    validation_data=(x_test, y_test),
+                    callbacks=[callback])
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
