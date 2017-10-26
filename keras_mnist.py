@@ -12,8 +12,9 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.optimizers import RMSprop
 from keras.callbacks import TensorBoard
-
-callback = TensorBoard(log_dir='./logs', histogram_freq=4, batch_size=128, write_graph=True, write_grads=True)
+from time import time
+callback = TensorBoard(log_dir="logs/{}".format(time()), histogram_freq=4, batch_size=128, write_graph=True,
+                       write_grads=True)
 
 batch_size = 128
 num_classes = 10
@@ -30,6 +31,7 @@ x_train /= 255
 x_test /= 255
 print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples')
+
 
 # convert class vectors to binary class matrices
 y_train = keras.utils.to_categorical(y_train, num_classes)
